@@ -33,11 +33,14 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
 
   const addTodo = (text: string) => {
     if (text.trim()) {
-      setTodos([...todos, { id: crypto.randomUUID(), text, completed: false }]);
+      const newTodo = { id: crypto.randomUUID(), text, completed: false };
+      console.log("TodoContext: Adding todo:", newTodo);
+      setTodos([...todos, newTodo]);
     }
   };
 
   const toggleTodo = (id: string) => {
+    console.log("TodoContext: Toggling todo completion:", id);
     setTodos(
       todos.map((todo) =>
         todo.id === id ? { ...todo, completed: !todo.completed } : todo
@@ -46,6 +49,7 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
   };
 
   const deleteTodo = (id: string) => {
+    console.log("TodoContext: Deleting todo:", id);
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 

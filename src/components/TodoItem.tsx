@@ -18,6 +18,16 @@ export const TodoItem = ({ id, text, completed }: TodoItemProps) => {
     console.log(`TodoItem component rendered: ${id}`);
   }, [id]);
 
+  const handleToggle = () => {
+    console.log(`TodoItem: Toggle event triggered for "${text}" (${id})`);
+    toggleTodo(id);
+  };
+
+  const handleDelete = () => {
+    console.log(`TodoItem: Delete event triggered for "${text}" (${id})`);
+    deleteTodo(id);
+  };
+
   return (
     <div className="flex items-center p-4 bg-white rounded-lg shadow-sm border border-gray-100 gap-3 group hover:shadow-md transition-all">
       <Button
@@ -27,7 +37,7 @@ export const TodoItem = ({ id, text, completed }: TodoItemProps) => {
           "rounded-full h-6 w-6 transition-colors",
           completed ? "bg-purple-500 text-white border-purple-500" : "border-gray-300"
         )}
-        onClick={() => toggleTodo(id)}
+        onClick={handleToggle}
       >
         {completed && <Check className="h-4 w-4" />}
       </Button>
@@ -45,7 +55,7 @@ export const TodoItem = ({ id, text, completed }: TodoItemProps) => {
         variant="ghost"
         size="icon"
         className="opacity-0 group-hover:opacity-100 transition-opacity text-gray-400 hover:text-red-500"
-        onClick={() => deleteTodo(id)}
+        onClick={handleDelete}
       >
         <Trash2 className="h-4 w-4" />
       </Button>

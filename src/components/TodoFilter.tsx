@@ -17,6 +17,11 @@ export const TodoFilter = () => {
     { value: "completed", label: "Completed" },
   ];
 
+  const handleFilterChange = (newFilter: "all" | "active" | "completed") => {
+    console.log(`TodoFilter: Filter changed to ${newFilter}`);
+    setFilter(newFilter);
+  };
+
   const activeCount = todos.filter(todo => !todo.completed).length;
   const completedCount = todos.filter(todo => todo.completed).length;
 
@@ -32,7 +37,7 @@ export const TodoFilter = () => {
             key={item.value}
             variant="ghost"
             size="sm"
-            onClick={() => setFilter(item.value)}
+            onClick={() => handleFilterChange(item.value)}
             className={cn(
               "text-sm",
               filter === item.value && "bg-purple-100 text-purple-700"

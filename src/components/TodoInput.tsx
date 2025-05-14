@@ -15,10 +15,16 @@ export const TodoInput = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    console.log("TodoInput: Submit event triggered");
     if (text.trim()) {
       addTodo(text);
       setText("");
     }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setText(e.target.value);
+    console.log("TodoInput: Text changed:", e.target.value);
   };
 
   return (
@@ -26,7 +32,7 @@ export const TodoInput = () => {
       <Input
         type="text"
         value={text}
-        onChange={(e) => setText(e.target.value)}
+        onChange={handleChange}
         placeholder="Add a task..."
         className="flex-1"
       />
