@@ -1,11 +1,15 @@
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useTodo } from "@/context/TodoContext";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export const TodoFilter = () => {
   const { filter, setFilter, todos } = useTodo();
+  
+  useEffect(() => {
+    console.log("TodoFilter component rendered");
+  }, []);
   
   const filters: { value: "all" | "active" | "completed"; label: string }[] = [
     { value: "all", label: "All" },

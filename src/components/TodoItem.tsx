@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useTodo } from "@/context/TodoContext";
 import { Button } from "@/components/ui/button";
 import { Check, Trash2 } from "lucide-react";
@@ -13,6 +13,10 @@ type TodoItemProps = {
 
 export const TodoItem = ({ id, text, completed }: TodoItemProps) => {
   const { toggleTodo, deleteTodo } = useTodo();
+  
+  useEffect(() => {
+    console.log(`TodoItem component rendered: ${id}`);
+  }, [id]);
 
   return (
     <div className="flex items-center p-4 bg-white rounded-lg shadow-sm border border-gray-100 gap-3 group hover:shadow-md transition-all">

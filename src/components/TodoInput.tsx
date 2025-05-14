@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useTodo } from "@/context/TodoContext";
@@ -8,6 +8,10 @@ import { Plus } from "lucide-react";
 export const TodoInput = () => {
   const [text, setText] = useState("");
   const { addTodo } = useTodo();
+
+  useEffect(() => {
+    console.log("TodoInput component rendered");
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

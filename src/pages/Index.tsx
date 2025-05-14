@@ -1,11 +1,15 @@
 
-import React from "react";
+import React, { useEffect } from "react";
 import { TodoProvider } from "@/context/TodoContext";
 import { TodoInput } from "@/components/TodoInput";
 import { TodoList } from "@/components/TodoList";
 import { ListTodo } from "lucide-react";
 
 const Index = () => {
+  useEffect(() => {
+    console.log("Index page component rendered");
+  }, []);
+
   return (
     <TodoProvider>
       <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-50 px-4 py-12">

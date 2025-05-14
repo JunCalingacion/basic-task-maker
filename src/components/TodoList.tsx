@@ -1,11 +1,15 @@
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useTodo } from "@/context/TodoContext";
 import { TodoItem } from "./TodoItem";
 import { TodoFilter } from "./TodoFilter";
 
 export const TodoList = () => {
   const { filteredTodos } = useTodo();
+
+  useEffect(() => {
+    console.log("TodoList component rendered");
+  }, []);
 
   return (
     <div className="w-full bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
