@@ -7,11 +7,11 @@ import { cn } from "@/lib/utils";
 
 type TodoItemProps = {
   id: string;
-  text: string;
+  title: string; // Changed from 'text' to 'title'
   completed: boolean;
 };
 
-export const TodoItem = ({ id, text, completed }: TodoItemProps) => {
+export const TodoItem = ({ id, title, completed }: TodoItemProps) => { // Changed from 'text' to 'title'
   const { toggleTodo, deleteTodo } = useTodo();
   
   useEffect(() => {
@@ -19,12 +19,12 @@ export const TodoItem = ({ id, text, completed }: TodoItemProps) => {
   }, [id]);
 
   const handleToggle = () => {
-    console.log(`TodoItem: Toggle event triggered for "${text}" (${id})`);
+    console.log(`TodoItem: Toggle event triggered for "${title}" (${id})`); // Changed from 'text' to 'title'
     toggleTodo(id);
   };
 
   const handleDelete = () => {
-    console.log(`TodoItem: Delete event triggered for "${text}" (${id})`);
+    console.log(`TodoItem: Delete event triggered for "${title}" (${id})`); // Changed from 'text' to 'title'
     deleteTodo(id);
   };
 
@@ -48,7 +48,7 @@ export const TodoItem = ({ id, text, completed }: TodoItemProps) => {
           completed && "line-through text-gray-400"
         )}
       >
-        {text}
+        {title} {/* Changed from 'text' to 'title' */}
       </span>
       
       <Button

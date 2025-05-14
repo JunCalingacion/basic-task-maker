@@ -3,13 +3,13 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 
 type Todo = {
   id: string;
-  text: string;
+  title: string; // Changed from 'text' to 'title'
   completed: boolean;
 };
 
 type TodoContextType = {
   todos: Todo[];
-  addTodo: (text: string) => void;
+  addTodo: (title: string) => void; // Changed parameter name
   toggleTodo: (id: string) => void;
   deleteTodo: (id: string) => void;
   filter: "all" | "active" | "completed";
@@ -31,9 +31,9 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
 
-  const addTodo = (text: string) => {
-    if (text.trim()) {
-      const newTodo = { id: crypto.randomUUID(), text, completed: false };
+  const addTodo = (title: string) => { // Changed parameter name
+    if (title.trim()) {
+      const newTodo = { id: crypto.randomUUID(), title, completed: false }; // Changed from 'text' to 'title'
       console.log("TodoContext: Adding todo:", newTodo);
       setTodos([...todos, newTodo]);
     }

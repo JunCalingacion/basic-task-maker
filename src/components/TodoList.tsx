@@ -19,7 +19,7 @@ export const TodoList = () => {
             <TodoItem
               key={todo.id}
               id={todo.id}
-              text={todo.text}
+              title={todo.title} // Changed from 'text' to 'title'
               completed={todo.completed}
             />
           ))}

@@ -6,7 +6,7 @@ import { useTodo } from "@/context/TodoContext";
 import { Plus } from "lucide-react";
 
 export const TodoInput = () => {
-  const [text, setText] = useState("");
+  const [title, setText] = useState(""); // Keep the setState function name for consistency
   const { addTodo } = useTodo();
 
   useEffect(() => {
@@ -16,8 +16,8 @@ export const TodoInput = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("TodoInput: Submit event triggered");
-    if (text.trim()) {
-      addTodo(text);
+    if (title.trim()) {
+      addTodo(title);
       setText("");
     }
   };
@@ -31,7 +31,7 @@ export const TodoInput = () => {
     <form onSubmit={handleSubmit} className="flex gap-2 mb-6 w-full">
       <Input
         type="text"
-        value={text}
+        value={title}
         onChange={handleChange}
         placeholder="Add a task..."
         className="flex-1"
