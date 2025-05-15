@@ -27,10 +27,9 @@ export const TodoInput = () => {
     const value = e.target.value;
     setInputValue(value);
     
-    if (isSearchMode) {
-      console.log("TodoInput: Filtering tasks:", value);
-      setSearchTerm(value);
-    }
+    // Always filter tasks as user types, regardless of mode
+    console.log("TodoInput: Filtering tasks:", value);
+    setSearchTerm(value);
   };
 
   const toggleMode = () => {
@@ -54,7 +53,7 @@ export const TodoInput = () => {
           placeholder={isSearchMode ? "Search tasks..." : "Add a task..."}
           className="w-full pr-8"
         />
-        {isSearchMode && inputValue && (
+        {inputValue && (
           <Button
             type="button"
             variant="ghost"
