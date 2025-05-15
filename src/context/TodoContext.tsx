@@ -15,6 +15,8 @@ type TodoContextType = {
   filter: "all" | "active" | "completed";
   setFilter: (filter: "all" | "active" | "completed") => void;
   filteredTodos: Todo[];
+  searchTerm: string;
+  setSearchTerm: (term: string) => void;
 };
 
 const TodoContext = createContext<TodoContextType | undefined>(undefined);
@@ -26,6 +28,7 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
   });
   
   const [filter, setFilter] = useState<"all" | "active" | "completed">("all");
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
@@ -36,6 +39,7 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
       const newTodo = { id: crypto.randomUUID(), title, completed: false }; // Changed from 'text' to 'title'
       console.log("TodoContext: Adding todo:", newTodo);
       setTodos([...todos, newTodo]);
+      setSearchTerm(""); // Clear search term after adding
     }
   };
 
@@ -53,11 +57,16 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
-  const filteredTodos = todos.filter((todo) => {
-    if (filter === "active") return !todo.completed;
-    if (filter === "completed") return todo.completed;
-    return true;
-  });
+  const filteredTodos = todos
+    .filter((todo) => {
+      if (filter === "active") return !todo.completed;
+      if (filter === "completed") return todo.completed;
+      return true;
+    })
+    .filter((todo) => {
+      return searchTerm === "" || 
+        todo.title.toLowerCase().includes(searchTerm.toLowerCase());
+    });
 
   return (
     <TodoContext.Provider
@@ -69,6 +78,8 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
         filter,
         setFilter,
         filteredTodos,
+        searchTerm,
+        setSearchTerm,
       }}
     >
       {children}
